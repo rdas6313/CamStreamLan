@@ -21,7 +21,7 @@
 
 #include <algorithm>
 
-#define MAX_VFRAME_EXTRACTOR_BUFFER_SIZE 3
+#define MAX_VFRAME_EXTRACTOR_BUFFER_SIZE 6
 #define EMPTY_FRAME (MAX_FRAME_NO + 1)
 
 using namespace std;
