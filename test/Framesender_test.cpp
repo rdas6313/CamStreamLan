@@ -4,7 +4,7 @@
 
 #define MACHINE_PORT 30001
 #define MACHINE_IP "192.168.0.179"
-#define MULTICAST_PORT 50001
+#define MULTICAST_PORT 50002
 #define MULTICAST_IP "235.0.0.1"
 
 void test_Vframe_sending()
