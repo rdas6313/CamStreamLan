@@ -101,7 +101,7 @@ void test_sending_live_video_frames()
 
         // Press 'q' to quit
         frame_count -= 1;
-        if (frame_count == 0 || cv::waitKey(100) == 'q')
+        if (frame_count == 0 || cv::waitKey(50) == 'q')
             break;
     }
 
