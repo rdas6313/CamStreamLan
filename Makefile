@@ -2,18 +2,28 @@ CC=g++
 CFLAGS=-Iheader -Wall -std=c++17
 OPENCV_C=$(shell pkg-config --cflags opencv4)
 OPENCV_L=$(shell pkg-config --libs opencv4)
+LFLAGS:=
+
+
+OS?=mac
+ifeq ($(OS),linux)
+	LFLAGS += -pthread -lrt
+	CFLAGS += -DLINUX
+endif	
+
+
 
 videoreceiver_test:	MReceiver.o MCommunicator.o Logger.o FrameReceiver.o VFrameExtractor.o CSemaphore.o SharedMem.o VideoReceiver_test.o
-	$(CC) $^ -o $@
+	$(CC) $^ -o $@ $(LFLAGS)
 
 videowindow_test: Logger.o CSemaphore.o SharedMem.o VideoWindow_test.o
-	$(CC) $^ -o $@ $(OPENCV_L)
+	$(CC) $^ -o $@ $(OPENCV_L) $(LFLAGS)
 
 framereceiver_test: MReceiver.o MCommunicator.o Logger.o Framereceiver_test.o FrameReceiver.o VFrameExtractor.o
-	$(CC) $^ -o $@ $(OPENCV_L)
+	$(CC) $^ -o $@ $(OPENCV_L) $(LFLAGS)
 
 framesender_test: MSender.o MCommunicator.o Logger.o Framesender_test.o FrameSender.o VFrameBuilder.o
-	$(CC) $^ -o $@ $(OPENCV_L)
+	$(CC) $^ -o $@ $(OPENCV_L) $(LFLAGS)
 
 mreceiver_test: MReceiver.o MCommunicator.o Logger.o Mreceiver_test.o
 	$(CC) $^ -o $@
