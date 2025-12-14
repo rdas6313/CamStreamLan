@@ -70,7 +70,7 @@ void test_sending_live_video_frames()
     // 3. Remove the initial cv::waitKey(100). It's no longer necessary and can cause hangs.
 
     cv::Mat frame;
-    int frame_count = 500;
+    int frame_count = 3000;
     while (true)
     {
         cout << "Capturing frame" << endl;
@@ -82,7 +82,9 @@ void test_sending_live_video_frames()
         }
         // compressing to jpeg
         std::vector<uchar> buf;
-        cv::imencode(".jpg", frame, buf); // compressed frame
+        cv::imencode(".jpg", frame, buf,
+                     {cv::IMWRITE_JPEG_QUALITY, 50,
+                      cv::IMWRITE_JPEG_PROGRESSIVE, 0}); // compressed frame
 
         // sending frame
         uint8_t *pbuf = reinterpret_cast<uint8_t *>(buf.data());
@@ -97,11 +99,11 @@ void test_sending_live_video_frames()
 
         // // de-comoressing to frame
         // cv::Mat received = cv::imdecode(buf, cv::IMREAD_COLOR);
-        // cv::imshow("Video", received);
+        cv::imshow("Video", frame);
 
         // Press 'q' to quit
         frame_count -= 1;
-        if (frame_count == 0 || cv::waitKey(50) == 'q')
+        if (frame_count == 0 || cv::waitKey(1) == 'q')
             break;
     }
 
