@@ -18,14 +18,13 @@ void test_live_video_receiving()
     string key = SHARED_KEY;
     int size = SHARED_BUFFER_SIZE;
     SPCBuffer<VideoFrame> buffer(key, size);
-
+    VideoFrame *frame = new VideoFrame;
     // Define callback to handle each received frame
-    auto res = [&buffer](uint8_t *pframe, uint32_t frame_size)
+    auto res = [&buffer, &frame](uint8_t *pframe, uint32_t frame_size)
     {
-        VideoFrame frame;
-        frame.size = frame_size;
-        memcpy(frame.data, pframe, frame_size);
-        buffer.write(&frame);
+        frame->size = frame_size;
+        memcpy(frame->data, pframe, frame_size);
+        buffer.write(frame);
     };
 
     // Set up network receiver
