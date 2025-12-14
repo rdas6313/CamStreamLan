@@ -2,7 +2,7 @@
 #define HEAD_VIDEOFRAME
 #include <stdint.h>
 
-#define MAX_FRAME_SIZE ((1 << 20) + sizeof(uint32_t))
+#define MAX_FRAME_SIZE (500000)
 
 class VideoFrame
 {
