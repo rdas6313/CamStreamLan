@@ -25,3 +25,8 @@ It aims to provide **low-latency**, **efficient**, and **one-to-many** video str
 - **Planned Additions:** GUI (Qt / ImGui), FPS optimization, error correction  
 
 ---
+
+## 🎥 Demo Video
+
+[![CamStreamLan Demo]()](https://youtu.be/PlrwF-Hveko)
+
